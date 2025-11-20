@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -25,10 +26,13 @@
             background: white;
             padding: 40px;
             border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
         }
 
-        h1 { color: #2c3e50; margin-bottom: 30px; }
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 30px;
+        }
 
         /* Main Menu Buttons */
         .menu-btn {
@@ -43,22 +47,29 @@
             font-size: 1.1em;
             cursor: pointer;
             transition: background 0.3s;
-            text-align: left; 
+            text-align: left;
         }
-        .menu-btn:hover { background-color: #2980b9; }
+
+        .menu-btn:hover {
+            background-color: #2980b9;
+        }
 
         /* Subject Button Specific Style */
         .subject-btn {
-            background-color: #2c3e50; /* Darker color for Subjects */
+            background-color: #2c3e50;
+            /* Darker color for Subjects */
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
-        .subject-btn:hover { background-color: #1a252f; }
+
+        .subject-btn:hover {
+            background-color: #1a252f;
+        }
 
         /* Sub-Menu (Chapter List) - Hidden by default */
         .chapter-list {
-            display: none; 
+            display: none;
             background-color: #ecf0f1;
             border-radius: 8px;
             margin-bottom: 10px;
@@ -79,6 +90,7 @@
             text-align: left;
             font-weight: 600;
         }
+
         .chapter-btn:hover {
             background-color: #dfe6e9;
             border-color: #3498db;
@@ -100,7 +112,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
             margin-bottom: 20px;
             border-radius: 0 0 8px 8px;
         }
@@ -121,7 +133,7 @@
             border-radius: 10px;
             padding: 25px;
             margin-bottom: 25px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
             border-left: 5px solid #3498db;
         }
 
@@ -180,9 +192,9 @@
             font-size: 0.95em;
             border-left: 4px solid #2c3e50;
         }
-
     </style>
 </head>
+
 <body>
 
     <div class="container">
@@ -190,7 +202,7 @@
         <div id="home-screen">
             <h1>BEL PE Practice Portal</h1>
             <p>Select a Subject or Paper</p>
-            
+
             <button class="menu-btn" onclick="loadQuiz('bel2023', '📄 BEL 2023 Full Paper (125 Qs)')">
                 📄 BEL 2023 Full Paper
             </button>
@@ -213,8 +225,12 @@
                 <button class="chapter-btn" onclick="loadQuiz('cn_ch1', 'Computer Networks: Chapter 1')">
                     👉 Chapter 1: Basics, OSI, TCP/IP
                 </button>
+                <button class="chapter-btn"
+                    onclick="loadQuiz('cn_ch2', 'Computer Networks: Chapter 2 (Physical Layer)')">
+                    👉 Chapter 2: Physical Layer (100+ Qs)
+                </button>
             </div>
-            
+
         </div>
 
         <div id="quiz-screen">
@@ -231,7 +247,9 @@
 
     <script src="bel2023.js"></script>
     <script src="algo_ch1.js"></script>
-    <script src="computer_networks_ch1.js"></script> <script>
+    <script src="computer_networks_ch1.js"></script>
+    <script src="computer_networks_ch2.js"></script>
+    <script>
         let currentScore = 0;
 
         // Function to toggle the chapter list visibility
@@ -256,20 +274,23 @@
             } else if (type === 'cn_ch1') { // Logic for Computer Networks
                 if (typeof computerNetCh1Data === 'undefined') { alert("Error: computer_networks_ch1.js missing!"); return; }
                 data = computerNetCh1Data;
+            } else if (type === 'cn_ch2') { // NEW LOGIC
+                if (typeof computerNetCh2Data === 'undefined') { alert("Error: computer_networks_ch2.js missing!"); return; }
+                data = computerNetCh2Data;
             }
 
             // 2. Switch Screens
             document.getElementById('home-screen').style.display = 'none';
             document.getElementById('quiz-screen').style.display = 'block';
             document.getElementById('quiz-title').innerText = title;
-            
+
             // 3. Reset Score
             currentScore = 0;
             document.getElementById('score-display').innerText = "Score: 0";
 
             // 4. Render Questions
             const container = document.getElementById('questions-container');
-            container.innerHTML = ''; 
+            container.innerHTML = '';
 
             data.forEach((q, index) => {
                 const card = createQuestionCard(q, index);
@@ -278,10 +299,10 @@
         }
 
         function goBack() {
-            if(confirm("Exit quiz? Progress will be lost.")) {
+            if (confirm("Exit quiz? Progress will be lost.")) {
                 document.getElementById('quiz-screen').style.display = 'none';
                 document.getElementById('home-screen').style.display = 'block';
-                window.scrollTo(0,0);
+                window.scrollTo(0, 0);
             }
         }
 
@@ -304,7 +325,7 @@
                 const optDiv = document.createElement('div');
                 optDiv.className = 'option-div';
                 optDiv.innerText = optText;
-                optDiv.onclick = function() {
+                optDiv.onclick = function () {
                     handleOptionClick(index, optIndex, qObj.correct, optsContainer, qObj.explanation, card);
                 };
                 optsContainer.appendChild(optDiv);
@@ -345,4 +366,5 @@
         }
     </script>
 </body>
+
 </html>
