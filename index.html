@@ -229,6 +229,10 @@
                     onclick="loadQuiz('cn_ch2', 'Computer Networks: Chapter 2 (Physical Layer)')">
                     👉 Chapter 2: Physical Layer (100+ Qs)
                 </button>
+                <button class="chapter-btn"
+                    onclick="loadQuiz('cn_ch3', 'Computer Networks: Chapter 3 (Data Link Layer)')">
+                    👉 Chapter 3: Data Link Layer (100+ Qs)
+                </button>
             </div>
 
         </div>
@@ -249,6 +253,7 @@
     <script src="algo_ch1.js"></script>
     <script src="computer_networks_ch1.js"></script>
     <script src="computer_networks_ch2.js"></script>
+    <script src="computer_networks_ch3.js"></script>
     <script>
         let currentScore = 0;
 
@@ -277,6 +282,9 @@
             } else if (type === 'cn_ch2') { // NEW LOGIC
                 if (typeof computerNetCh2Data === 'undefined') { alert("Error: computer_networks_ch2.js missing!"); return; }
                 data = computerNetCh2Data;
+            } else if (type === 'cn_ch3') { // NEW LOGIC
+                if (typeof computerNetCh3Data === 'undefined') { alert("Error: computer_networks_ch3.js missing!"); return; }
+                data = computerNetCh3Data;
             }
 
             // 2. Switch Screens
